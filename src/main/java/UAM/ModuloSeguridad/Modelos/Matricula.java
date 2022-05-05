@@ -1,6 +1,7 @@
 package UAM.ModuloSeguridad.Modelos;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.LinkedList;
 
@@ -9,6 +10,10 @@ public class Matricula {
     String _id;
     LinkedList<Double> notas;
     double notaFinal;
+    @DBRef
+    Curso curso;
+    @DBRef
+    Estudiante estudiante;
 
     public Matricula(LinkedList<Double> notas, double notaFinal) {
         this.notas = notas;
@@ -37,5 +42,21 @@ public class Matricula {
 
     public void setNotaFinal(double notaFinal) {
         this.notaFinal = notaFinal;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 }

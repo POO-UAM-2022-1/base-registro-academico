@@ -2,6 +2,7 @@ package UAM.ModuloSeguridad.Modelos;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -11,6 +12,8 @@ public class Curso {
     String _id;
     String inicialesMateria;
     String descripcion;
+    @DBRef
+    Departamento departamento;
 
     public Curso(String inicialesMateria, String descripcion) {
         this.inicialesMateria = inicialesMateria;
@@ -37,4 +40,11 @@ public class Curso {
         this.descripcion = descripcion;
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
 }

@@ -1,7 +1,10 @@
 package UAM.ModuloSeguridad.Controladores;
 
 import UAM.ModuloSeguridad.Modelos.Curso;
+import UAM.ModuloSeguridad.Modelos.Departamento;
+import UAM.ModuloSeguridad.Modelos.Profesor;
 import UAM.ModuloSeguridad.Repositorios.RepositorioCurso;
+import UAM.ModuloSeguridad.Repositorios.RepositorioDepartamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,8 @@ public class ControladorCurso {
     @Autowired
     private RepositorioCurso miRepositorioCurso;
 
+    @Autowired
+    private RepositorioDepartamento miRepositorioDepartamento;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -31,5 +36,16 @@ public class ControladorCurso {
                 .findById(id)
                 .orElseThrow(RuntimeException::new);
         return cursoActual;
+    }
+    @PutMapping("{id_curso}/departamento/{id_departamento}")
+    public Curso update(@PathVariable String id_curso, @PathVariable String id_departamento){
+        Curso cursoActual =this.miRepositorioCurso
+                .findById(id_curso)
+                .orElseThrow(RuntimeException::new);
+        Departamento departamentoActual =this.miRepositorioDepartamento
+                .findById(id_departamento)
+                .orElseThrow(RuntimeException::new);
+        cursoActual.setDepartamento(departamentoActual);
+        return this.miRepositorioCurso.save(cursoActual);
     }
 }

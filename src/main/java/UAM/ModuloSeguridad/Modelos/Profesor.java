@@ -1,6 +1,7 @@
 package UAM.ModuloSeguridad.Modelos;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -8,6 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Profesor extends Persona{
     String profesion;
     int anosExperiencia;
+
+    @DBRef
+    Curso curso;
 
     public Profesor(String cedula, String nombre, String email, String profesion, int anosExperiencia) {
         super(cedula, nombre, email);
@@ -29,5 +33,13 @@ public class Profesor extends Persona{
 
     public void setAnosExperiencia(int anosExperiencia) {
         this.anosExperiencia = anosExperiencia;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 }
