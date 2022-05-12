@@ -32,4 +32,18 @@ public class ControladorEstudiante {
                 .orElseThrow(RuntimeException::new);
         return estudianteActual;
     }
+    @GetMapping("/cedula/{cedula}")
+    public Estudiante buscarPorCedula(@PathVariable String cedula){
+        Estudiante estudianteActual=this.miRepositorioEstudiante.getEstudiantePorCedula(cedula);
+        return estudianteActual;
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id){
+        Estudiante estudianteActual=this.miRepositorioEstudiante
+                .findById(id)
+                .orElseThrow(RuntimeException::new);
+        this.miRepositorioEstudiante.delete(estudianteActual);
+    }
+
 }

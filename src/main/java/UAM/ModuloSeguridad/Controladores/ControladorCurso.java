@@ -37,6 +37,11 @@ public class ControladorCurso {
                 .orElseThrow(RuntimeException::new);
         return cursoActual;
     }
+    @GetMapping("departamento/{id_departamento}")
+    public List<Curso> getCursosDepartamento(@PathVariable String id_departamento){
+        System.out.println("id "+id_departamento);
+        return this.miRepositorioCurso.getCursosEnDepartamento(id_departamento);
+    }
     @PutMapping("{id_curso}/departamento/{id_departamento}")
     public Curso update(@PathVariable String id_curso, @PathVariable String id_departamento){
         Curso cursoActual =this.miRepositorioCurso
