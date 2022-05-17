@@ -45,5 +45,16 @@ public class ControladorEstudiante {
                 .orElseThrow(RuntimeException::new);
         this.miRepositorioEstudiante.delete(estudianteActual);
     }
-
+    @PutMapping("{id}")
+    public Estudiante update(@PathVariable String id,@RequestBody  Estudiante infoEstudiante){
+        Estudiante estudianteActual=this.miRepositorioEstudiante
+                .findById(id)
+                .orElseThrow(RuntimeException::new);
+        estudianteActual.setNombre(infoEstudiante.getNombre());
+        estudianteActual.setApellido(infoEstudiante.getApellido());
+        estudianteActual.setEmail(infoEstudiante.getEmail());
+        estudianteActual.setInicialesDepartamento(infoEstudiante.getInicialesDepartamento());
+        estudianteActual.setMunicipioResidencia(infoEstudiante.getMunicipioResidencia());
+        return this.miRepositorioEstudiante.save(estudianteActual);
+    }
 }
